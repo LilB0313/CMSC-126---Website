@@ -219,7 +219,7 @@
             // if editing the details of customer was successful
             echo "<div class='container-form'>".
               "<section class='features'>".
-                "<h4>Data Editted Successfully</h4>".
+                "<h4>Data Edited Successfully</h4>".
               "</section>".
             "</div>";
           }
