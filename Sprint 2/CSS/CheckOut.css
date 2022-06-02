@@ -1,0 +1,44 @@
+/* for the background and its height design */
+body {
+  height: 100vh;
+  background: linear-gradient(to right, #0000FF, #00FFFF);
+}
+
+/* design for the form */
+.info-form, .payment-form {
+  display: grid;
+  grid-row-gap: 20px;
+  padding-top: 20px;
+  padding-left: 70px;
+  padding-right: 70px;
+  text-align: left;
+}
+
+/* for the credit section design */
+.credit {
+  display: grid;
+  grid-row-gap: 20px;
+  text-align: left;
+  padding-top: 20px;
+}
+
+/* design for every submission button/input */
+.submit {
+    width: 100%;
+    text-align: center;
+}
+
+
+/* executes when the website size if less than 800px */
+@media screen and (max-width: 800px) {
+  /* mostly change in background color and padding */
+  .container {
+    background-color: rgba(60, 500, 430, 0.5);
+    top: 15.0vw;
+    display: block;
+  }
+
+  .payment-form {
+    padding-top: 60px;
+  }
+}

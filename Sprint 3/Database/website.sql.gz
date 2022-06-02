@@ -1,0 +1,223 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jun 02, 2022 at 12:01 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.5
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `website`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking`
+--
+
+CREATE TABLE `booking` (
+  `CustID` int(5) NOT NULL,
+  `Set_Type` int(1) NOT NULL,
+  `GuestNo` int(100) NOT NULL,
+  `StayDate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`CustID`, `Set_Type`, `GuestNo`, `StayDate`) VALUES
+(1, 1, 10, '2022-05-31'),
+(2, 1, 50, '2022-06-04'),
+(5, 1, 6, '2022-06-08'),
+(6, 3, 10, '2022-06-15'),
+(7, 1, 4, '2022-06-06'),
+(8, 4, 10, '2022-06-08'),
+(9, 3, 8, '2022-06-16'),
+(10, 3, 14, '2022-06-26'),
+(31, 3, 8, '2022-06-15'),
+(32, 1, 4, '2022-07-06'),
+(33, 2, 17, '2022-06-21'),
+(34, 1, 10, '2022-06-15'),
+(35, 1, 7, '2022-06-23'),
+(36, 0, 0, '0000-00-00'),
+(37, 0, 0, '0000-00-00'),
+(38, 0, 0, '0000-00-00'),
+(39, 0, 0, '0000-00-00'),
+(40, 0, 0, '0000-00-00'),
+(41, 0, 0, '0000-00-00'),
+(43, 0, 0, '0000-00-00'),
+(44, 0, 0, '0000-00-00'),
+(45, 0, 0, '0000-00-00'),
+(46, 4, 10, '2022-06-30'),
+(48, 4, 10, '2022-06-24'),
+(49, 2, 25, '2022-06-25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `card`
+--
+
+CREATE TABLE `card` (
+  `CardNo` int(16) NOT NULL,
+  `CardName` text CHARACTER SET utf8 NOT NULL,
+  `ExpMonth` varchar(15) NOT NULL,
+  `ExpYear` year(4) NOT NULL,
+  `CVV` int(12) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `card`
+--
+
+INSERT INTO `card` (`CardNo`, `CardName`, `ExpMonth`, `ExpYear`, `CVV`) VALUES
+(9098382, '', 'January', 2023, 4231),
+(23242342, '', 'January', 2023, 2147483647),
+(87988031, '', 'November', 2023, 342135);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE `customer` (
+  `CustID` int(5) NOT NULL,
+  `CustName` text CHARACTER SET utf8 NOT NULL,
+  `CustAddress` text CHARACTER SET utf8 NOT NULL,
+  `CustNo` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`CustID`, `CustName`, `CustAddress`, `CustNo`) VALUES
+(1, 'Honey Kyle', 'Saug, Bayacabac', 2147483647),
+(2, 'Analisa G', 'Payapa Str. Dauis', 2147483647),
+(4, 'Hannah Love', 'Maribojoc', 333159494),
+(5, 'Hannah Love', 'Maribojoc', 333159494),
+(6, 'Lola Loud', 'Happy Town', 2147483647),
+(7, 'Scarlet Snow', 'Maribojoc', 2147483647),
+(8, 'Kyla Deloso', 'Saug, Bayacabac', 2147483647),
+(9, 'Snow White', 'Green Land', 2147483647),
+(10, 'Summer', 'SunnyVille', 932384321),
+(31, 'Hanako Ichiro', 'Green Land', 2147483647),
+(32, 'Philip C', 'Maribojoc', 583424112),
+(33, 'Apple Pie', 'Potato Land', 2147483647),
+(34, 'Charlie Sy', 'Maribojoc', 333159494),
+(35, 'Camila Ong', 'Poblacion, Maribojoc, Bohol', 934123123),
+(46, 'Myrtlle Gem Last Oraño', 'Saug, Bayacabac', 1323),
+(48, 'Daiki Suzumiya', 'Dampas Tagbilaran', 923243200),
+(49, 'Sumatra Key', 'Maribojoc', 333159494);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stay_type`
+--
+
+CREATE TABLE `stay_type` (
+  `Set_Type` int(11) NOT NULL,
+  `StayType` text NOT NULL,
+  `Price` decimal(4,0) NOT NULL,
+  `MaxPeople` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `stay_type`
+--
+
+INSERT INTO `stay_type` (`Set_Type`, `StayType`, `Price`, `MaxPeople`) VALUES
+(1, 'Day Use', '3000', 20),
+(2, 'Day Use', '4000', 20),
+(3, 'Overnight', '3000', 6),
+(4, 'Overnight', '5000', 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaction`
+--
+
+CREATE TABLE `transaction` (
+  `CustID` int(5) NOT NULL,
+  `PaymentType` text NOT NULL,
+  `CardNo` int(16) DEFAULT NULL,
+  `Cost` decimal(7,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaction`
+--
+
+INSERT INTO `transaction` (`CustID`, `PaymentType`, `CardNo`, `Cost`) VALUES
+(33, 'In Person', NULL, '4000.00'),
+(34, 'In Person', NULL, '3000.00'),
+(35, 'In Person', NULL, '3000.00'),
+(40, 'In Person', NULL, '0.00'),
+(46, 'Credit', 23242342, '5000.00'),
+(48, 'Credit', 9098382, '5000.00'),
+(49, 'Credit', 87988031, '4375.00');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `booking`
+--
+ALTER TABLE `booking`
+  ADD PRIMARY KEY (`CustID`);
+
+--
+-- Indexes for table `card`
+--
+ALTER TABLE `card`
+  ADD PRIMARY KEY (`CardNo`);
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`CustID`);
+
+--
+-- Indexes for table `stay_type`
+--
+ALTER TABLE `stay_type`
+  ADD PRIMARY KEY (`Set_Type`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `CustID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT for table `stay_type`
+--
+ALTER TABLE `stay_type`
+  MODIFY `Set_Type` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
