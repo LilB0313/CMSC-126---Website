@@ -188,6 +188,34 @@
                       WHERE CustID = '$id';";
             $updatebooking = $conn -> query($query);
 
+            // if the insertion of booking detail was successful
+            if ($updatebooking) {
+              $search = "SELECT Price, MaxPeople
+                      FROM stay_type
+                      WHERE Set_Type='$stay';";                                       // get the price and maximum number of people from the stay_type table
+              $details = $conn -> query($search);                                     // the Set_Type is that of the customer's reservation
+
+              // if the details were retrieved successfully
+              if ($details) {
+                $check_max = $details -> fetch_assoc();
+                $max = $check_max["MaxPeople"];                                       // fetch these data
+                $price = $check_max["Price"];
+
+                // if the guest_no indicated by the users exceed the limit
+                if ($guest_no > $max) {
+                  $add_on_guest = $guest_no - $max;                                   // count the number of extra people
+                  $add_on = $add_on_guest * 75;                                       // by default, the entrance fee is 75 pesos
+                  $total = $price + $add_on;                                          // add this to get the total bill of the customer
+
+                  $price = $total;                                                    // save the total
+                }
+
+                $sql = "UPDATE transaction
+                        SET Cost='$price'
+                        WHERE CustID='$id';";                                         // update the transaction cost
+                $updateTransaction = $conn -> query($sql);
+              }
+            }
             // if editing the details of customer was successful
             echo "<div class='container-form'>".
               "<section class='features'>".
